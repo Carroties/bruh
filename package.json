@@ -1,0 +1,35 @@
+{
+  "name": "pacil-lost-found",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n API,WEB \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run db:generate && npm run build -w client",
+    "start": "npm start -w server",
+    "lint": "eslint .",
+    "test": "npm run test -w server && npm run test -w client",
+    "test:db": "npm run test:db -w server",
+    "db:generate": "npm run db:generate -w server",
+    "db:migrate": "npm run db:migrate -w server",
+    "db:seed": "npm run db:seed -w server"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "prettier": "^3.10.1"
+  },
+  "overrides": {
+    "effect": "3.22.5"
+  }
+}

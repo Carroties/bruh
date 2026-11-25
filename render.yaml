@@ -1,0 +1,22 @@
+# Deployment template. Link your own repository and fill environment values.
+services:
+  - type: web
+    name: pacil-lost-found-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: STORAGE
+        value: prisma
+      - key: DATABASE_URL
+        sync: false
+      - key: CLIENT_ORIGINS
+        sync: false
+      - key: TRUST_PROXY_HOPS
+        value: "1"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

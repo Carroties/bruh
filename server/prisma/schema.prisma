@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+  engineType = "client"
+}
+datasource db {
+  provider = "postgresql"
+}
+enum ReportType {
+  LOST
+  FOUND
+}
+enum Category {
+  ELECTRONICS
+  ID_CARD
+  BOTTLE
+  CLOTHING
+  ACCESSORIES
+  OTHER
+}
+enum ContactMethod {
+  EMAIL
+  WHATSAPP
+}
+model Report {
+  id            String        @id @default(uuid()) @db.Uuid
+  type          ReportType
+  itemName      String        @db.VarChar(100)
+  description   String        @db.VarChar(2000)
+  category      Category
+  location      String        @db.VarChar(100)
+  occurredAt    DateTime      @db.Date
+  contactMethod ContactMethod
+  contactValue  String        @db.VarChar(254)
+  imageUrl      String?
+  imagePublicId String?       @unique
+  createdAt     DateTime      @default(now())
+  @@index([createdAt, id])
+  @@index([type, category, location])
+}
